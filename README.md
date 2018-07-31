@@ -20,6 +20,11 @@ Install react-create npm package globally. This will help to easily run the proj
 ```bash
 npm install -g react-create
 ```
+## Live Application URL
+
+The Application is deployed in https://aditya-sridhar.github.io/simple-reactjs-app
+
+Click on the link to see the application
 
 ## Cloning and Running the Application in local
 
