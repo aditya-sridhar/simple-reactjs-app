@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Panel from 'react-bootstrap/lib/Panel'
 import Button from 'react-bootstrap/lib/Button'
 import CustomerDetails from './CustomerDetails'
-import axios from 'axios'
+import axiosHelper from './helper/axios';
 
 export default class Customers extends Component {
 
@@ -18,11 +18,11 @@ export default class Customers extends Component {
     this.getCustomerData();
   }
 
+
   //Function to get the Customer Data from json
-  getCustomerData() {
-    axios.get('assets/samplejson/customerlist.json').then(response => {
-      this.setState({customerList: response})
-    })
+  getCustomerData = async () => {
+    let response = await axiosHelper('get', 'assets/samplejson/customerlist.json');
+    this.setState({ customerList: response })
   };
 
   render() {
