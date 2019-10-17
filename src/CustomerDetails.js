@@ -8,6 +8,7 @@ export default class CustomerDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {}
+    this.getCustomerDetails = this.getCustomerDetails.bind(this);
   }
 
   //Function which is called when the component loads for the first time
@@ -20,6 +21,7 @@ export default class CustomerDetails extends Component {
 
     //get Customer Details only if props has changed
     if (this.props.val !== prevProps.val) {
+      console.log(this.props.val)
       this.getCustomerDetails(this.props.val)
     }
   }
