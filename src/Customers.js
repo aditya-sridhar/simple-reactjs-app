@@ -11,7 +11,9 @@ export default class Customers extends Component {
     this.state = {
       selectedCustomer: 1
     }
+    this.getCustomerData=this.getCustomerData.bind(this)
   }
+
 
   //function which is called the first time the component loads
   componentDidMount() {
@@ -39,7 +41,8 @@ export default class Customers extends Component {
             <Panel.Body>
               <p>{customer.email}</p>
               <p>{customer.phone}</p>
-              <Button bsStyle="info" onClick={() => this.setState({selectedCustomer: customer.id})}>
+              <Button bsStyle="info" onClick={() => {this.setState({selectedCustomer: customer.id}) 
+                                                        }}>
 
                 Click to View Details
 

@@ -1,0 +1,13 @@
+{
+	"id": 4,
+	"name": "Prabhat",
+	"email": "prabhat@gmail.com",
+	"phone": "123412345",
+	"city": "Bhubaneswar",
+	"state": "Odisha",
+	"country": "India",
+	"organization": "Company 4",
+	"jobProfile": "Software Developer",
+	"additionalInfo": "Buys Lots of Products in general"
+	
+}
