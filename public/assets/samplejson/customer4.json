@@ -1,0 +1,12 @@
+{
+  "id": 4,
+  "name": "xyz",
+  "email": "xyz@gmail.com",
+  "phone": "123456789",
+  "city": "rajkot",
+  "state": "gujarat",
+  "country": "India",
+  "organization": "Company 1",
+  "jobProfile": "Software Developer",
+  "additionalInfo": "Has Bought a lot of products before and a high Value Customer"
+}
