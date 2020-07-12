@@ -2,7 +2,7 @@
   "name": "simple-reactjs-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aditya-sridhar.github.io/simple-reactjs-app",
+  "homepage": "./",
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.4.1",
@@ -10,7 +10,6 @@
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
-
   },
   "scripts": {
     "start": "react-scripts start",
