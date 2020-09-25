@@ -1,12 +1,12 @@
 {
 	"id": 2,
-	"name": "ABCD",
-	"email": "abcd@test.com",
+	"name": "Patrick Star",
+	"email": "patrick@test.com",
 	"phone": "987654321",
-	"city": "Mangalore",
-	"state": "karnataka",
-	"country": "India",
+	"city": "Bikini Bottom",
+	"state": "-",
+	"country": "-",
 	"organization": "Company 2",
-	"jobProfile": "Software Developer",
-	"additionalInfo": "Buys Products Rarely"
+	"jobProfile": "Krusty Krab Employee, Chum Bucket Employee, Inventor \"Nose Cleaner, Back Scraper, Hair Comber and 9000 Ukelele Player\", Inventor of Pencils, Mirrors, and Light Bulbs that were found before he found them, King of Bikini Bottom, Jellyfish Hunter, Student of Mrs. Puff's Boating School, College Student, Filmmaker \"Adventure in the Underground City\" which contains only \"There's adventure, there's city, there's dungeon\".",
+	"additionalInfo": "-"
 }
