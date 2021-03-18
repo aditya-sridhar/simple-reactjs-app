@@ -28,6 +28,7 @@ export default class CustomerDetails extends Component {
   getCustomerDetails(id) {
     axios.get('assets/samplejson/customer' + id + '.json').then(response => {
       this.setState({customerDetails: response})
+      console.log('Details ')
     })
   };
 
