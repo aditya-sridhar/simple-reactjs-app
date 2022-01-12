@@ -1,7 +1,6 @@
-# Simple React JS Project
-
+# PE Assignment React JS Project
+Original repository can be found here - https://github.com/aditya-sridhar/simple-reactjs-app
 ## What is the use of this Repo
-
 This Project is a Simple ReactJS Project which demonstrates the following
 1. Creating a Component in React
 2. Making HTTP calls
@@ -11,53 +10,28 @@ This Project is a Simple ReactJS Project which demonstrates the following
 
 The project Template can be used to build bigger projects
 
-## Live Application URL
-
-### https://aditya-sridhar.github.io/simple-reactjs-app
-This URL has the application deployed in
-
 ## Prerequisites
 
 ### Install Node JS
 Refer to https://nodejs.org/en/ to install nodejs
 
-### Install create-react-app
-Install create-react-app npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install create-react-app
+## Tesing the React app locally
+1. Clone the repository
+2. Install the dependencies
+3. Start the application
 
-```bash
-npm install -g create-react-app
-```
-## Live Application URL
-
-The Application is deployed in https://aditya-sridhar.github.io/simple-reactjs-app
-
-Click on the link to see the application
-
-## Cloning and Running the Application in local
-
-Clone the project into local
-
-Install all the npm packages. Go into the project folder and type the following command to install all npm packages
-
-```bash
+git clone https://github.com/aditya-sridhar/simple-reactjs-app.git
 npm install
-```
-
-In order to run the application Type the following command
-
-```bash
 npm start
-```
 
-The Application Runs on **localhost:3000**
+## Dockerizing the appliaction and testing with Docker locally
+Clone the repository and build the Docker image:
+git clone https://github.com/davidpinhas/simple-reactjs-app.git
+cd simple-reactjs-app/
+docker build . -t <ARTIFACTORY_SERVER_NAME>.jfrog.io/docker/pe-node-web-app
+docker run -p 8080:3000 -d <ARTIFACTORY_SERVER_NAME>.jfrog.io/docker/pe-node-web-app
 
-## Application design
-
-#### Components
-
-1. **Customers** Component : This Component displays a list of customers. This Component gets the data from a json file in assets folder
-
-2. **CustomerDetails** Component : This Component Displays the details of the selected customer. This Component gets its data from a json file in assets folder as well. This Component is the Child Component of *Customers* Component
+The application should be accessible through localhost with the assigned port http://localhost:8080/
 
 #### HTTP client
 
