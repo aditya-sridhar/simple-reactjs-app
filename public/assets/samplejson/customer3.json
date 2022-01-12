@@ -3,10 +3,10 @@
 	"name": "Tyrion",
 	"email": "tyrion@test.com",
 	"phone": "123412345",
-	"city": "Chennai",
-	"state": "Tamil Nadu",
-	"country": "India",
-	"organization": "Company 3",
+	"city": "Tel Aviv",
+	"state": "Tel Aviv",
+	"country": "Israel",
+	"organization": "JFrog",
 	"jobProfile": "Software Developer",
 	"additionalInfo": "Buys Lots of Products in general"
 }
