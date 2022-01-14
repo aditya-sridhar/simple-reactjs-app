@@ -16,8 +16,6 @@ pipelines:
             - name: source_code         # required
           outputResources:
             - name: npm_app_build_info            
-          integrations:
-            - name: artifactory
         execution:
           onSuccess:
             - add_pipeline_variables appVersion="${appVersion}"
