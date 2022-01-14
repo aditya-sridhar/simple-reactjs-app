@@ -3,12 +3,11 @@ resources:
   - name: source_code
     type: GitRepo
     configuration:
-      gitProvider: github
+      gitProvider: peGitHub
       path: davidpinhas/simple-reactjs-app
       branches:
         # Specifies which branches will trigger dependent steps
         include: master
-
 
   - name: npm_app_build_info
     type: BuildInfo
