@@ -1,0 +1,63 @@
+resources:
+#NPM application
+  - name: source_code
+    type: GitRepo
+    configuration:
+      gitProvider: github
+      path: davidpinhas/simple-reactjs-app
+      branches:
+        # Specifies which branches will trigger dependent steps
+        include: master
+
+
+  - name: npm_app_build_info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: npm_app_pipeline
+      buildNumber: '${run_number}'
+
+  - name: npm_app_build_promote_to_staging
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: npm_app_pipeline
+      buildNumber: '${run_number}'
+
+  - name: npm_app_build_promote_to_prod
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: npm_app_pipeline
+      buildNumber: '${run_number}'
+
+# Dockerizing NPM application
+#  - name: npm_app
+#    type: FileSpec
+#    configuration:
+#      sourceArtifactory: artifactory
+#      pattern: 'pe-npm-local/*/webservice-*.war'
+#      target: war/webservice.war
+#      flat: true
+
+  - name: docker_app_build_info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: docker_app_pipeline
+      buildNumber: '${run_number}'
+
+  - name: docker_app_build_info_scanned
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: docker_app_pipeline
+      buildNumber: '${run_number}'
+
+  - name: docker_app_build_info_promoted_staging
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: artifactory
+      buildName: docker_app
+      buildNumber: '${run_number}'
+
