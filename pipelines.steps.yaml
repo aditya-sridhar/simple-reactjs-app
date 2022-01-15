@@ -58,9 +58,9 @@ pipelines:
             type: image
         execution: 
           onExecute: 
-            - "printenv int_pegeneric_jfrog-rt-user"
-            - "printenv int_pegeneric_jfrog-rt-password"
-            - "printenv int_pegeneric_jfrog-rt-server"
+            - printenv int_pegeneric_jfrog-rt-user
+            - printenv int_pegeneric_jfrog-rt-password
+            - printenv int_pegeneric_jfrog-rt-server
             - "git clone https://github.com/davidpinhas/simple-reactjs-app.git"
             - "cd simple-reactjs-app"
             - "jfrog config add $int_pegeneric_jfrog-rt-server --artifactory-url https://$int_pegeneric_jfrog-rt-server.jfrog.io/artifactory --user $int_pegeneric_jfrog-rt-user --password $int_pegeneric_jfrog-rt-password --interactive=false"
