@@ -1,73 +1,71 @@
-# pipelines:
-#   - name: npm_app_pipeline
-#     # configuration:
-#     #   environmentVariables:
-#     #     readOnly:
-#     #       appVersion: 1.0.${run_number}
-#     steps:
-#       - name: npm_build_step
-#         type: NpmBuild
-#         configuration:
-#           repositoryName: pe-npm      # required, npm repository name on artifacctory
-#           sourceLocation: .      # required, location of package.json file
-#           integrations:
-#             - name:  artifactory  # required
-#           inputResources:
-#             - name: pe_source_code         # required
-#           outputResources:
-#             - name: npm_app_build_info            
-#         execution:
-#           onSuccess:
-#             - add_pipeline_variables appVersion="${appVersion}"
-
-
-
 pipelines: 
-  - name: npm_app_pipeline1
+  - name: npm_app_pipeline
     steps: 
-      - name: bash_npm_install1
-        type: Bash
-        configuration: 
-          runtime:
-            type: host
-          environmentVariables: 
-            appVersion: "1.0.${run_number}"
-          integrations: 
+      - name: npm_build_install
+        type: NpmBuild
+        configuration:
+          #inherits all the tags from bash; https://www.jfrog.com/confluence/display/JFROG/Bash
+          # for payloadType npm:
+          repositoryName: pe-npm
+          sourceLocation: .
+          integrations:
             - name: artifactory
-            - name: pegeneric
-          nodePool: default-dynamic-nodepool
           inputResources:
             - name: pe_source_code
-          outputResources: 
-            - name: npm_app_build_info
-        execution: 
-          onExecute: 
-            - printenv int_pegeneric_user
-            - printenv int_pegeneric_password
-            - printenv int_pegeneric_server
-            - git clone https://github.com/davidpinhas/simple-reactjs-app.git
-            - cd simple-reactjs-app
-            - jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false
-            - jfrog rt npm-config --server-id-resolve $int_pegeneric_server --server-id-deploy $int_pegeneric_server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
-            - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
-            - jfrog rt bag npm-app 1.0.${run_number}
-            - jfrog rt bce npm-app 1.0.${run_number}
-            - jfrog rt bp npm-app 1.0.${run_number}
+   
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete:                                  #always
+            - echo "Cleaning up some stuff"
 
-      - name: npm_publish_buildinfo
-        type: PublishBuildInfo
-        configuration:
-          inputSteps:
-            - name: bash_npm_install1
-          outputResources:
-            - name: npm_app_build_info
+      # - name: bash_npm_install1
+      #   type: Bash
+      #   configuration: 
+      #     runtime:
+      #       type: host
+      #     environmentVariables: 
+      #       appVersion: "1.0.${run_number}"
+      #     integrations: 
+      #       - name: artifactory
+      #       - name: pegeneric
+      #     nodePool: default-dynamic-nodepool
+      #     inputResources:
+      #       - name: pe_source_code
+      #     outputResources: 
+      #       - name: npm_app_build_info
+      #   execution: 
+      #     onExecute: 
+      #       - printenv int_pegeneric_user
+      #       - printenv int_pegeneric_password
+      #       - printenv int_pegeneric_server
+      #       - git clone https://github.com/davidpinhas/simple-reactjs-app.git
+      #       - cd simple-reactjs-app
+      #       - jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false
+      #       - jfrog rt npm-config --server-id-resolve $int_pegeneric_server --server-id-deploy $int_pegeneric_server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
+      #       - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
+      #       - jfrog rt bag npm-app 1.0.${run_number}
+      #       - jfrog rt bce npm-app 1.0.${run_number}
+      #       - jfrog rt bp npm-app 1.0.${run_number}
+
+      # - name: npm_publish_buildinfo
+      #   type: PublishBuildInfo
+      #   configuration:
+      #     inputSteps:
+      #       - name: bash_npm_install1
+      #     outputResources:
+      #       - name: npm_app_build_info
 
 
-      - name: npm_app_scan
-        type: XrayScan
-        configuration:
-          failOnScan: true
-          inputSteps:
-            - name: npm_publish_buildinfo
-          inputResources:
-            - name: npm_app_build_info
+      # - name: npm_app_scan
+      #   type: XrayScan
+      #   configuration:
+      #     failOnScan: true
+      #     inputSteps:
+      #       - name: npm_publish_buildinfo
+      #     inputResources:
+      #       - name: npm_app_build_info
