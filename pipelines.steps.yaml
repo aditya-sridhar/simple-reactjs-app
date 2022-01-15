@@ -51,21 +51,21 @@ pipelines:
               branch: master
           outputResources:
             - name: npm_app_build_info
-    runtime:
-      type: image
-      image:
-        auto:
-          language: nodejs
-          versions:
-            - "10.16.3"
-    execution:
-      onExecute:
-        - printenv int_pegeneric_jfrog-rt-user
-        - printenv int_pegeneric_jfrog-rt-password
-        - printenv int_pegeneric_jfrog-rt-server
-        - git clone https://github.com/davidpinhas/simple-reactjs-app.git
-        - cd simple-reactjs-app
-        - jfrog config add $int_pegeneric_jfrog-rt-server --artifactory-url https://$int_pegeneric_jfrog-rt-server.jfrog.io/artifactory --user $int_pegeneric_jfrog-rt-user --password $int_pegeneric_jfrog-rt-password --interactive=false 
-        - jfrog rt npm-config --server-id-resolve $int_pegeneric_jfrog-rt-server --server-id-deploy $int_pegeneric_jfrog-rt-server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
-        - jfrog npm install --build-name=npm-app --build-number=1.0.${run_number}
-        - jfrog npm publish --build-name=npm-app --build-number=1.0.${run_number}
+      runtime:
+        type: image
+        image:
+          auto:
+            language: nodejs
+            versions:
+              - "10.16.3"
+      execution:
+        onExecute:
+          - printenv int_pegeneric_jfrog-rt-user
+          - printenv int_pegeneric_jfrog-rt-password
+          - printenv int_pegeneric_jfrog-rt-server
+          - git clone https://github.com/davidpinhas/simple-reactjs-app.git
+          - cd simple-reactjs-app
+          - jfrog config add $int_pegeneric_jfrog-rt-server --artifactory-url https://$int_pegeneric_jfrog-rt-server.jfrog.io/artifactory --user $int_pegeneric_jfrog-rt-user --password $int_pegeneric_jfrog-rt-password --interactive=false 
+          - jfrog rt npm-config --server-id-resolve $int_pegeneric_jfrog-rt-server --server-id-deploy $int_pegeneric_jfrog-rt-server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
+          - jfrog npm install --build-name=npm-app --build-number=1.0.${run_number}
+          - jfrog npm publish --build-name=npm-app --build-number=1.0.${run_number}
