@@ -47,7 +47,7 @@ pipelines:
             - name: artifactory
           inputResources:
             - name: pe_source_code
-            branch: master
+              branch: master
           outputResources:
             - name: npm_app_build_info
           runtime:
