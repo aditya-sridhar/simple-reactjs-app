@@ -7,7 +7,7 @@ pipelines:
           #inherits all the tags from bash; https://www.jfrog.com/confluence/display/JFROG/Bash
           # for payloadType npm:
           repositoryName: pe-npm
-          sourceLocation: .
+          sourceLocation: ./simple-reactjs-app
           integrations:
             - name: artifactory
           inputResources:
@@ -52,20 +52,20 @@ pipelines:
       #       - jfrog rt bce npm-app 1.0.${run_number}
       #       - jfrog rt bp npm-app 1.0.${run_number}
 
-      # - name: npm_publish_buildinfo
-      #   type: PublishBuildInfo
-      #   configuration:
-      #     inputSteps:
-      #       - name: bash_npm_install1
-      #     outputResources:
-      #       - name: npm_app_build_info
+      - name: npm_publish_buildinfo
+        type: PublishBuildInfo
+        configuration:
+          inputSteps:
+            - name: npm_build_install
+          outputResources:
+            - name: npm_app_build_info
 
 
-      # - name: npm_app_scan
-      #   type: XrayScan
-      #   configuration:
-      #     failOnScan: true
-      #     inputSteps:
-      #       - name: npm_publish_buildinfo
-      #     inputResources:
-      #       - name: npm_app_build_info
+      - name: npm_app_scan
+        type: XrayScan
+        configuration:
+          failOnScan: true
+          inputSteps:
+            - name: npm_publish_buildinfo
+          inputResources:
+            - name: npm_app_build_info
