@@ -28,6 +28,8 @@ pipelines:
       - name: bash_npm_install
         type: Bash
         configuration: 
+          runtime:
+            type: host
           environmentVariables: 
             appVersion: "1.0.${run_number}"
           integrations: 
@@ -53,6 +55,8 @@ pipelines:
       - name: npm_publish_step
         type: NpmPublish
         configuration:
+          runtime:
+            type: host
           # for payloadType npm:
           repositoryName: pe-npm       # required, npm repository name on artifactory
           autoPublishBuildInfo: true       # optional
