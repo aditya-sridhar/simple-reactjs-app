@@ -38,6 +38,7 @@ pipelines:
   - name: npm_app_pipeline
     steps: 
       - name: bash-npm-install
+        type: Bash
         configuration: 
           environmentVariables: 
             appVersion: "1.0.${run_number}"
@@ -45,14 +46,7 @@ pipelines:
             - name: artifactory
           nodePool: default-dynamic-nodepool
           outputResources: 
-            - ame: npm_app_build_info
-          runtime: 
-            image: 
-              auto: 
-                language: nodejs
-                versions: 
-                  - "10.16.3"
-            type: image
+            - name: npm_app_build_info
         execution: 
           onExecute: 
             - printenv int_pegeneric_jfrog-rt-user
@@ -64,5 +58,3 @@ pipelines:
             - "jfrog rt npm-config --server-id-resolve $int_pegeneric_jfrog-rt-server --server-id-deploy $int_pegeneric_jfrog-rt-server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local"
             - "jfrog npm install --build-name=npm-app --build-number=1.0.${run_number}"
             - "jfrog npm publish --build-name=npm-app --build-number=1.0.${run_number}"
-        name: npm_build_step
-        type: Bash
