@@ -52,3 +52,4 @@ pipelines:
             - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
             - jfrog rt bag npm-app 1.0.${run_number}
             - jfrog rt bce npm-app 1.0.${run_number}
+            - jfrog rt bp npm-app 1.0.${run_number}
