@@ -25,7 +25,7 @@
 pipelines: 
   - name: npm_app_pipeline
     steps: 
-      - name: bash_npm_install1
+      - name: bash_npm_install
         type: Bash
         configuration: 
           runtime:
@@ -52,7 +52,7 @@ pipelines:
             - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
             - jfrog rt npmp --build-name=npm-app --build-number=1.0.${run_number}
 
-      - name: bash_npm_publish1
+      - name: bash_npm_publish
         type: Bash
         configuration: 
           runtime:
@@ -62,7 +62,7 @@ pipelines:
           integrations: 
             - name: artifactory
           inputResources:
-            - name: bash_npm_install1
+            - name: bash_npm_install
           outputResources: 
             - name: npm_app_build_info
         execution: 
