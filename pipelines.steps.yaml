@@ -4,25 +4,24 @@ pipelines:
       - name: npm_build_install
         type: NpmBuild
         configuration:
-          #inherits all the tags from bash; https://www.jfrog.com/confluence/display/JFROG/Bash
-          # for payloadType npm:
-          repositoryName: pe-npm
+          resolverRepo: pe-npm-remote
           sourceLocation: ./simple-reactjs-app
           integrations:
             - name: artifactory
           inputResources:
             - name: pe_source_code
    
-        execution:
-          onStart:
-            - echo "Preparing for work..."
-          onSuccess:
-            - echo "Job well done!"
-          onFailure:
-            - echo "uh oh, something went wrong"
-          onComplete:                                  #always
-            - echo "Cleaning up some stuff"
-
+      - name: npm_build_publish
+        type: NpmPublish
+        configuration:
+          deployerRepo: pe-npm-local
+          integrations:
+            - name: artifactory
+          inputSteps:
+            - name: npm_build_install
+          outputResources:
+            - name: npm_app_build_info
+   
       # - name: bash_npm_install1
       #   type: Bash
       #   configuration: 
@@ -56,7 +55,7 @@ pipelines:
         type: PublishBuildInfo
         configuration:
           inputSteps:
-            - name: npm_build_install
+            - name: npm_build_publish
           outputResources:
             - name: npm_app_build_info
 
