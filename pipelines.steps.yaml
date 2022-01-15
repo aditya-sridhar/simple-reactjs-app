@@ -35,12 +35,12 @@
 #             - name: npm_app_build_info                 # optional
 
 pipelines:
-  - name:           npm_app_pipeline
+  - name: npm_app_pipeline
     steps:
-      - name:       npm_build_step
-        type:       Bash
+      - name: npm_build_step
+        type: Bash
         configuration:
-          nodePool:         default-dynamic-nodepool
+          nodePool: default-dynamic-nodepool
           environmentVariables:
             appVersion: 1.0.${run_number}
           integrations:
