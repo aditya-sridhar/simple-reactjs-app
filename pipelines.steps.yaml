@@ -35,20 +35,17 @@
 #             - name: npm_app_build_info                 # optional
 
 pipelines: 
-  - 
-    name: npm_app_pipeline
+  - name: npm_app_pipeline
     steps: 
-      - 
+      - name: bash-npm-install
         configuration: 
           environmentVariables: 
             appVersion: "1.0.${run_number}"
           integrations: 
-            - 
-              name: artifactory
+            - name: artifactory
           nodePool: default-dynamic-nodepool
           outputResources: 
-            - 
-              name: npm_app_build_info
+            - ame: npm_app_build_info
           runtime: 
             image: 
               auto: 
