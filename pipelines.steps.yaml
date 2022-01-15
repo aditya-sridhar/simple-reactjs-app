@@ -23,9 +23,9 @@
 
 
 pipelines: 
-  - name: npm_app_pipeline
+  - name: npm_app_pipeline1
     steps: 
-      - name: bash_npm_install
+      - name: bash_npm_install1
         type: Bash
         configuration: 
           runtime:
