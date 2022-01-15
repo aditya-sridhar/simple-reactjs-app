@@ -37,7 +37,7 @@
 pipelines: 
   - name: npm_app_pipeline
     steps: 
-      - name: bash-npm-install
+      - name: bash_npm_install
         type: Bash
         configuration: 
           environmentVariables: 
