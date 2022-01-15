@@ -33,16 +33,6 @@
 #             - name: npm_build_step                # required
 #           outputResources:
 #             - name: npm_app_build_info                 # optional
-resources:
-#NPM application
-  - name: pe_source_code
-    type: GitRepo
-    configuration:
-      gitProvider: peGitHub
-      path: davidpinhas/simple-reactjs-app
-      branches:
-        # Specifies which branches will trigger dependent steps
-        include: master
 
 pipelines:
   - name: npm_app_pipeline
@@ -55,9 +45,6 @@ pipelines:
             appVersion: 1.0.${run_number}
           integrations:
             - name: artifactory
-          inputResources:
-            - name: pe_source_code
-              branch: master
           outputResources:
             - name: npm_app_build_info
           runtime:
