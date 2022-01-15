@@ -21,18 +21,6 @@
 #             - add_pipeline_variables appVersion="${appVersion}"
 
 
-#       - name: npm_publish_step
-#         type: NpmPublish
-#         configuration:
-#           # for payloadType npm:
-#           repositoryName: pe-npm        # required, npm repository name on artifactory
-#           autoPublishBuildInfo: true       # optional
-#           integrations:
-#             - name: artifactory      # required
-#           inputSteps:
-#             - name: npm_build_step                # required
-#           outputResources:
-#             - name: npm_app_build_info                 # optional
 
 pipelines: 
   - name: npm_app_pipeline
@@ -61,3 +49,16 @@ pipelines:
             - jfrog rt npm-config --server-id-resolve $int_pegeneric_server --server-id-deploy $int_pegeneric_server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
             - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
             - jfrog rt npmp --build-name=npm-app --build-number=1.0.${run_number}
+
+      - name: npm_publish_step
+        type: NpmPublish
+        configuration:
+          # for payloadType npm:
+          repositoryName: pe-npm       # required, npm repository name on artifactory
+          autoPublishBuildInfo: true       # optional
+          integrations:
+            - name: artifactory      # required
+          inputSteps:
+            - name: bash_npm_install                # required
+          outputResources:
+            - name: npm_app_build_info                 # optional
