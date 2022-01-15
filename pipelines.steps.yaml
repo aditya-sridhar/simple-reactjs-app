@@ -53,3 +53,13 @@ pipelines:
             - jfrog rt bag npm-app 1.0.${run_number}
             - jfrog rt bce npm-app 1.0.${run_number}
             - jfrog rt bp npm-app 1.0.${run_number}
+
+      - name: npm_app_scan
+        type: XrayScan
+        configuration:
+          failOnScan: true
+          inputResources:
+            - name: bash_npm_install1
+              trigger: true
+          outputResources:
+            - name: npm_app_build_info
