@@ -1,35 +1,71 @@
+# pipelines:
+#   - name: npm_app_pipeline
+#     # configuration:
+#     #   environmentVariables:
+#     #     readOnly:
+#     #       appVersion: 1.0.${run_number}
+#     steps:
+#       - name: npm_build_step
+#         type: NpmBuild
+#         configuration:
+#           repositoryName: pe-npm      # required, npm repository name on artifacctory
+#           sourceLocation: .      # required, location of package.json file
+#           integrations:
+#             - name:  artifactory  # required
+#           inputResources:
+#             - name: pe_source_code         # required
+#           outputResources:
+#             - name: npm_app_build_info            
+#         execution:
+#           onSuccess:
+#             - add_pipeline_variables appVersion="${appVersion}"
+
+
+#       - name: npm_publish_step
+#         type: NpmPublish
+#         configuration:
+#           # for payloadType npm:
+#           repositoryName: pe-npm        # required, npm repository name on artifactory
+#           autoPublishBuildInfo: true       # optional
+#           integrations:
+#             - name: artifactory      # required
+#           inputSteps:
+#             - name: npm_build_step                # required
+#           outputResources:
+#             - name: npm_app_build_info                 # optional
+
 pipelines:
-  - name: npm_app_pipeline
-    # configuration:
-    #   environmentVariables:
-    #     readOnly:
-    #       appVersion: 1.0.${run_number}
+  - name:           npm_app_pipeline
     steps:
-      - name: npm_build_step
-        type: NpmBuild
+      - name:       npm_build_step
+        type:       Bash
         configuration:
-          repositoryName: pe-npm      # required, npm repository name on artifacctory
-          sourceLocation: .      # required, location of package.json file
+          nodePool:         default-dynamic-nodepool
+          environmentVariables:
+            appVersion: 1.0.${run_number}
           integrations:
-            - name:  artifactory  # required
+            - name: artifactory
+
           inputResources:
-            - name: pe_source_code         # required
+            - name: pe_source_code
+              branch: master
           outputResources:
-            - name: npm_app_build_info            
-        execution:
-          onSuccess:
-            - add_pipeline_variables appVersion="${appVersion}"
-
-
-      - name: npm_publish_step
-        type: NpmPublish
-        configuration:
-          # for payloadType npm:
-          repositoryName: pe-npm        # required, npm repository name on artifactory
-          autoPublishBuildInfo: true       # optional
-          integrations:
-            - name: artifactory      # required
-          inputSteps:
-            - name: npm_build_step                # required
-          outputResources:
-            - name: npm_app_build_info                 # optional
+            - name: npm_app_build_info
+    runtime:
+      type: image
+      image:
+        auto:
+          language: nodejs
+          versions:
+            - "10.16.3"
+    execution:
+      onExecute:
+        - printenv int_pegeneric_jfrog-rt-user
+        - printenv int_pegeneric_jfrog-rt-password
+        - printenv int_pegeneric_jfrog-rt-server
+        - git clone https://github.com/davidpinhas/simple-reactjs-app.git
+        - cd simple-reactjs-app
+        - jfrog config add $int_pegeneric_jfrog-rt-server --artifactory-url https://$int_pegeneric_jfrog-rt-server.jfrog.io/artifactory --user $int_pegeneric_jfrog-rt-user --password $int_pegeneric_jfrog-rt-password --interactive=false 
+        - jfrog rt npm-config --server-id-resolve $int_pegeneric_jfrog-rt-server --server-id-deploy $int_pegeneric_jfrog-rt-server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
+        - jfrog npm install --build-name=npm-app --build-number=1.0.${run_number}
+        - jfrog npm publish --build-name=npm-app --build-number=1.0.${run_number}

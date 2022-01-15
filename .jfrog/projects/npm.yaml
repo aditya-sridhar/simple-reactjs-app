@@ -1,0 +1,8 @@
+version: 1
+type: npm
+resolver:
+  repo: pe-npm-remote
+  serverId: davidp-saas
+deployer:
+  repo: pe-npm-local
+  serverId: davidp-saas
