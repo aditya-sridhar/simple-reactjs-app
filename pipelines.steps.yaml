@@ -34,34 +34,38 @@
 #           outputResources:
 #             - name: npm_app_build_info                 # optional
 
-pipelines:
-  - name: npm_app_pipeline
-    steps:
-      - name: npm_build_step
-        type: Bash
-        configuration:
+pipelines: 
+  - 
+    name: npm_app_pipeline
+    steps: 
+      - 
+        configuration: 
+          environmentVariables: 
+            appVersion: "1.0.${run_number}"
+          integrations: 
+            - 
+              name: artifactory
           nodePool: default-dynamic-nodepool
-          environmentVariables:
-            appVersion: 1.0.${run_number}
-          integrations:
-            - name: artifactory
-          outputResources:
-            - name: npm_app_build_info
-          runtime:
-            type: image
-            image:
-              auto:
+          outputResources: 
+            - 
+              name: npm_app_build_info
+          runtime: 
+            image: 
+              auto: 
                 language: nodejs
-                versions:
+                versions: 
                   - "10.16.3"
-        execution:
-          onExecute:
-            - printenv int_pegeneric_jfrog-rt-user
-            - printenv int_pegeneric_jfrog-rt-password
-            - printenv int_pegeneric_jfrog-rt-server
-            - git clone https://github.com/davidpinhas/simple-reactjs-app.git
-            - cd simple-reactjs-app
-            - jfrog config add $int_pegeneric_jfrog-rt-server --artifactory-url https://$int_pegeneric_jfrog-rt-server.jfrog.io/artifactory --user $int_pegeneric_jfrog-rt-user --password $int_pegeneric_jfrog-rt-password --interactive=false 
-            - jfrog rt npm-config --server-id-resolve $int_pegeneric_jfrog-rt-server --server-id-deploy $int_pegeneric_jfrog-rt-server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
-            - jfrog npm install --build-name=npm-app --build-number=1.0.${run_number}
-            - jfrog npm publish --build-name=npm-app --build-number=1.0.${run_number}
+            type: image
+        execution: 
+          onExecute: 
+            - "printenv int_pegeneric_jfrog-rt-user"
+            - "printenv int_pegeneric_jfrog-rt-password"
+            - "printenv int_pegeneric_jfrog-rt-server"
+            - "git clone https://github.com/davidpinhas/simple-reactjs-app.git"
+            - "cd simple-reactjs-app"
+            - "jfrog config add $int_pegeneric_jfrog-rt-server --artifactory-url https://$int_pegeneric_jfrog-rt-server.jfrog.io/artifactory --user $int_pegeneric_jfrog-rt-user --password $int_pegeneric_jfrog-rt-password --interactive=false"
+            - "jfrog rt npm-config --server-id-resolve $int_pegeneric_jfrog-rt-server --server-id-deploy $int_pegeneric_jfrog-rt-server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local"
+            - "jfrog npm install --build-name=npm-app --build-number=1.0.${run_number}"
+            - "jfrog npm publish --build-name=npm-app --build-number=1.0.${run_number}"
+        name: npm_build_step
+        type: Bash
