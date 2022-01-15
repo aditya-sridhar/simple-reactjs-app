@@ -1,6 +1,6 @@
 resources:
 #NPM application
-  - name: source_code
+  - name: pe_source_code
     type: GitRepo
     configuration:
       gitProvider: peGitHub
