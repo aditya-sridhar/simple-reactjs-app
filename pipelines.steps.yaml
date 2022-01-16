@@ -89,7 +89,7 @@ pipelines:
             - name: artifactory
           inputResources:
             - name: npm_app_build_info
-              trigger: false
+              trigger: true
           outputResources:
             - name: npm_app_build_info_propoted_prod
         execution:
