@@ -32,6 +32,7 @@ pipelines:
             buildNumber: "1.0.${run_number}"
           runtime:
             type: image
+            image:
               custom:
                 name: ubuntu
                 tag: 20.04
