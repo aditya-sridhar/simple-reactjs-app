@@ -169,7 +169,7 @@ pipelines:
             - name: docker_app_build_info
               trigger: true
           inputSteps:
-            - name: xray_scan_docker_build_info_back_app
+            - name: xray_scan_docker_build_info_npm_app
           outputResources:
             - name: docker_app_build_info_promoted_prod
         execution:
