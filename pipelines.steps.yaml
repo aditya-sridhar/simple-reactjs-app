@@ -188,7 +188,7 @@ pipelines:
           inputResources:
             - name: pe_source_code
           inputSteps:
-            - name: promoting_docker_build_info_app
+            - name: publish_docker_npm_app
               trigger: true
           outputResources:
             - name: helm_chart_npm_app_resource
