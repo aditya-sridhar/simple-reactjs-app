@@ -2,8 +2,8 @@ pipelines:
 
 ## Using NpmBuild step will fail due to issue https://jira.jfrog.org/browse/RTDEV-25641
 
-  # - name: npm_app_pipeline
-  #   steps: 
+  - name: npm_app_pipeline
+    steps: 
   #     - name: npm_build_install
   #       type: NpmBuild
   #       configuration:
@@ -65,7 +65,7 @@ pipelines:
       - name: npm_app_scan
         type: XrayScan
         configuration:
-          failOnScan: true
+          failOnScan: false
           inputSteps:
             - name: npm_publish_buildinfo
           inputResources:
