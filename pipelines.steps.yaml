@@ -60,6 +60,8 @@ pipelines:
       - name: npm_publish_buildinfo
         type: PublishBuildInfo
         configuration:
+          environmentVariables:
+            buildStepName: bash_npm_build_publish
           inputSteps:
             - name: bash_npm_build_publish
           runtime:
