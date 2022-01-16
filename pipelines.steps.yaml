@@ -1,9 +1,6 @@
 pipelines: 
 
 ## Using NpmBuild step will fail due to issue https://jira.jfrog.org/browse/RTDEV-25641
-
-  - name: npm_app_pipeline
-    steps: 
   #     - name: npm_build_install
   #       type: NpmBuild
   #       configuration:
@@ -24,7 +21,9 @@ pipelines:
   #           - name: npm_build_install
   #         outputResources:
   #           - name: npm_app_build_info
-   
+
+  - name: npm_app_pipeline
+    steps:    
       - name: bash_npm_build_publish
         type: Bash
         configuration: 
