@@ -31,9 +31,10 @@ pipelines:
           runtime:
             type: host
           environmentVariables: 
+            readOnly:
+              JFROG_CLI_BUILD_NAME: bash_npm_build_publish
+              JFROG_CLI_BUILD_NUMBER: "1.0.${run_number}"
             appVersion: "1.0.${run_number}"
-            buildName: bash_npm_build_publish
-            buildNumber: "1.0.${run_number}"
           integrations: 
             - name: artifactory
             - name: pegeneric
