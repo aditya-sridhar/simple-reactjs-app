@@ -1,6 +1,3 @@
-template: true
-valuesFilePath: ./values.yaml
-
 pipelines: 
 
 ## Using NpmBuild step will fail due to issue https://jira.jfrog.org/browse/RTDEV-25641
@@ -209,18 +206,18 @@ pipelines:
         type: HelmBlueGreenDeploy
         configuration:
           helmVersion: 3
-          namespace: {{ .Values.runtime.namespace }}
-          blueReleaseName: {{ .Values.runtime.blueReleaseName }}
-          blueFlags: "--set image.registry='{{ .Values.appImage.registryUrl }}/docker'"
-          greenReleaseName: {{ .Values.runtime.greenReleaseName }}
-          greenFlags: "--set image.registry='{{ .Values.appImage.registryUrl }}/docker'"
+          namespace: davidp-webapp
+          blueReleaseName: app-blue
+          blueFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
+          greenReleaseName: app-green
+          greenFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
           roleServices:
-            - liveName: {{ .Values.runtime.liveServiceName }}
+            - liveName: app
               blueReferenceName: blue-app
               greenReferenceName: green-app
-              idleName: {{ .Values.runtime.idleServiceName }}
+              idleName: app-idle
           integrations:
-            - name: {{ .Values.runtime.k8s_integration }}
+            - name: davidp_k8s
           inputResources:
             - name: helm_chart_npm_app_resource
 
@@ -229,7 +226,7 @@ pipelines:
         configuration:
           deployStep: helm_blue_green_deploy
           integrations:
-            - name: {{ .Values.runtime.k8s_integration }}
+            - name: davidp_k8s
           inputSteps:
             - name: helm_blue_green_deploy
 
@@ -238,6 +235,6 @@ pipelines:
         configuration:
           deployStep: helm_blue_green_deploy
           integrations:
-            - name: {{ .Values.runtime.k8s_integration }}
+            - name: davidp_k8s
           inputSteps:
             - name: helm_blue_green_role_switch
