@@ -213,9 +213,9 @@ pipelines:
           greenFlags: "--set image.registry='{{ .Values.appImage.registryUrl }}/docker'"
           roleServices:
             - blueReferenceName: {{ .Values.runtime.blueReleaseName }}-app
-              greenReferenceName: {{ .Values.runtime.greenReleaseName }}-app
-              idleName: {{ .Values.runtime.idleServiceName }}
-              liveName: {{ .Values.runtime.liveServiceName }}
+            - greenReferenceName: {{ .Values.runtime.greenReleaseName }}-app
+            - idleName: {{ .Values.runtime.idleServiceName }}
+            - liveName: {{ .Values.runtime.liveServiceName }}
           integrations:
             - name: {{ .Values.runtime.k8s_integration }}
           inputResources:
