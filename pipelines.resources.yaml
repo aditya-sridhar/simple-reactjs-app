@@ -31,12 +31,12 @@ resources:
       buildNumber: '${run_number}'
 
 # Dockerizing NPM application
-#  - name: npm_app
+#  - name: npm_app_package
 #    type: FileSpec
 #    configuration:
 #      sourceArtifactory: artifactory
-#      pattern: 'pe-npm-local/*/webservice-*.war'
-#      target: war/webservice.war
+#      pattern: 'pe-npm-local/simple-reactjs-app/*/simple-reactjs-app-*.tgz'
+#      target: package/simple-reactjs-app-*.tgz
 #      flat: true
 
   - name: docker_app_build_info
