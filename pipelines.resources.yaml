@@ -23,7 +23,7 @@ resources:
       buildName: npm_app_pipeline
       buildNumber: '${run_number}'
 
-  - name: npm_app_build_promote_to_prod
+  - name: npm_app_build_info_propoted_prod
     type: BuildInfo
     configuration:
       sourceArtifactory: artifactory
