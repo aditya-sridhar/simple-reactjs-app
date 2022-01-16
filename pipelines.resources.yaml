@@ -59,7 +59,7 @@ resources:
   - name: docker_app_image
     type: Image
     configuration:
-      registry: {{ .Values.image.repository}}
+      registry: docker
       sourceRepository: pe-docker
       imageName: {{ .Values.image.repository}}
       imageTag: latest
