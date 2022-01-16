@@ -54,8 +54,8 @@ pipelines:
             - jfrog rt bag npm-app 1.0.${run_number}
             - jfrog rt bce npm-app 1.0.${run_number}
             - jfrog rt bp npm-app 1.0.${run_number}
-            - export buildName:"bash_npm_build_publish"
-            - export buildNumber:"1.0.${run_number}"
+            - export buildName="bash_npm_build_publish"
+            - export buildNumber="1.0.${run_number}"
 
       - name: npm_publish_buildinfo
         type: PublishBuildInfo
