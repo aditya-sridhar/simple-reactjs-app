@@ -55,7 +55,7 @@ resources:
   
   - name: docker_app_image
     type: Image
-    configurations:
+    configuration:
       registry: {{ .Values.image.registry}}
       sourceRepository: pe-docker
       imageName: {{ .Values.image.repository}}
