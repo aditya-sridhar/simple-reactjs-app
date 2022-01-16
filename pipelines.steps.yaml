@@ -70,7 +70,6 @@ pipelines:
           outputResources:
             - name: npm_app_build_info
 
-
       - name: npm_app_scan
         type: XrayScan
         configuration:
@@ -79,3 +78,21 @@ pipelines:
             - name: npm_publish_buildinfo
           inputResources:
             - name: npm_app_build_info
+
+      - name: promoteNpmBuildStep
+        type: PromoteBuild
+        configuration:
+          targetRepository: pe-prod-npm
+          includeDependencies: true
+          copy: true
+          integrations:
+            - name: artifactory
+          inputResources:
+            - name: npm_app_build_info
+              trigger: false
+          outputResources:
+            - name: npm_app_build_info_propoted_prod
+        execution:
+          onSuccess:
+            - write_output npm_app_build_info_propoted_prod version=${appVersion}
+            - jfrog rt sp --build=${res_npm_app_build_info_buildName}/${res_npm_app_build_info_buildNumber} pe-npm-local/ "app.version=${appVersion}"
