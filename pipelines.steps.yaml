@@ -184,6 +184,7 @@ pipelines:
         configuration:
           helmVersion: 3
           lint: true
+          chartPath: ".$res_pe_source_code_resourcePath/npm-app-chart"
           # affinityGroup: docker_group
           inputResources:
             - name: pe_source_code
@@ -191,7 +192,6 @@ pipelines:
             - name: promoting_docker_build_info_app
           outputResources:
             - name: helm_chart_npm_app_resource
-          chartPath: davidpinhas/simple-reactjs-app/npm-app-chart
           flags: --app-version=${dockerImageTagVersion} --version 1.0.${run_number}
         execution:
           onStart:
