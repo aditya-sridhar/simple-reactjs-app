@@ -1,3 +1,5 @@
+valuesFilePath: ./values.yml
+
 resources:
 #NPM application
   - name: pe_source_code
