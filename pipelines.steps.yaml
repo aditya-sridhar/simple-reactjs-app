@@ -184,7 +184,7 @@ pipelines:
         configuration:
           helmVersion: 3
           lint: true
-          chartPath: "./npm-app-chart/chart.yaml"
+          chartPath: "npm-app-chart/chart.yaml"
           # affinityGroup: docker_group
           inputResources:
             - name: pe_source_code
