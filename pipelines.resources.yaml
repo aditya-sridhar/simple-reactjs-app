@@ -70,5 +70,5 @@ resources:
     configuration:
       sourceArtifactory: artifactory
       repository: pe-helm
-      chart: npm_app_chart
+      chart: npm-app-chart
       version: 1.0.'${run_number}'
