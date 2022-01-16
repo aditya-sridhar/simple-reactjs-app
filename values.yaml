@@ -1,0 +1,11 @@
+gitRepo:
+  gitProvider: peGitHub
+  path: davidpinhas/simple-reactjs-app 
+  branch: master
+
+appImage:
+  registry: artifactory
+  registryUrl: davidp-pe-docker.jfrog.io
+
+appChart:
+  sourceArtifactory: artifactory
