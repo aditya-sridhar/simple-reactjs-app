@@ -188,8 +188,7 @@ pipelines:
           inputResources:
             - name: pe_source_code
           inputSteps:
-            - name: publish_docker_npm_app
-              trigger: true
+            - name: promoting_docker_build_info_app
           outputResources:
             - name: helm_chart_npm_app_resource
           chartPath: davidpinhas/simple-reactjs-app/chart
