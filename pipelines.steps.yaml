@@ -5,7 +5,7 @@ pipelines:
         type: NpmBuild
         configuration:
           timeoutSeconds: 240
-          resolverRepo: pe-npm-remote
+          resolverRepo: pe-npm
           sourceLocation: .
           integrations:
             - name: artifactory

@@ -1,8 +1,0 @@
-version: 1
-type: npm
-resolver:
-  repo: pe-npm-remote
-  serverId: davidp
-deployer:
-  repo: pe-npm-local
-  serverId: davidp
