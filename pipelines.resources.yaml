@@ -52,6 +52,15 @@ resources:
       sourceArtifactory: artifactory
       buildName: docker_app
       buildNumber: '${run_number}'
+  
+  - name: docker_app_image
+    type: Image
+    Configurations:
+      registry: {{ .Values.image.registry}}
+      sourceRepository: pe-docker
+      imageName: {{ .Values.image.repository}}
+      imageTag: latest
+      autoPull: true
 
   - name: helm_chart_npm_app_resource
     type: HelmChart
