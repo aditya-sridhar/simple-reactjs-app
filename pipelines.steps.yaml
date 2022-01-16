@@ -47,8 +47,8 @@ pipelines:
             - printenv int_pegeneric_server
             - git clone https://github.com/davidpinhas/simple-reactjs-app.git
             - cd simple-reactjs-app
-#            - jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false
-            - if ! grep $int_pegeneric_server  ~/.jfrog/jfrog-cli.conf.v5; then jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false; fi
+            - jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false
+#            - if ! grep $int_pegeneric_server  ~/.jfrog/jfrog-cli.conf.v5; then jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false; fi
             - jfrog rt npm-config --server-id-resolve $int_pegeneric_server --server-id-deploy $int_pegeneric_server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
             - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
             - jfrog rt bag npm-app 1.0.${run_number}
