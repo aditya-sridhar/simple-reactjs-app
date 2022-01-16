@@ -4,7 +4,7 @@ containerPort: 8080
 containerPortHttps: 8443
 
 image:
-  registry: davidp-pe-docker.jfrog.io
+  registry: davidp.jfrog.io
   repository: npm-app
   pullPolicy: IfNotPresent
 
