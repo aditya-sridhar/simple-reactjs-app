@@ -46,17 +46,17 @@ resources:
       buildName: docker_app_pipeline
       buildNumber: '${run_number}'
 
-  - name: docker_app_build_info_scanned
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: artifactory
-      buildName: docker_app_pipeline
-      buildNumber: '${run_number}'
-
-  - name: docker_app_build_info_promoted_staging
+  - name: docker_app_build_info_promoted_prod
     type: BuildInfo
     configuration:
       sourceArtifactory: artifactory
       buildName: docker_app
       buildNumber: '${run_number}'
 
+  - name: helm_chart_npm_app_resource
+    type: HelmChart
+    configuration:
+      sourceArtifactory: artifactory
+      repository: pe-helm
+      chart: helm_chart_npm_app_chart
+      version: 1.0.'${run_number}'

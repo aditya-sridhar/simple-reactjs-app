@@ -153,3 +153,42 @@ pipelines:
             - name: publish_docker_npm_app
           inputResources:
             - name: docker_app_build_info
+
+      - name: promoting_docker_build_info_app
+        type: PromoteBuild
+        configuration:
+          affinityGroup: docker_group
+          targetRepository: pe-docker-local
+          includeDependencies: false
+          status: "DOCKER_SCAN_OK"
+          comment: "Xray scan passed succesfully"
+          copy: "True"
+          integrations:
+            - name: artifactory
+          inputResources:
+            - name: docker_app_build_info
+              trigger: true
+          inputSteps:
+            - name: xray_scan_docker_build_info_back_app
+          outputResources:
+            - name: docker_app_build_info_promoted_prod
+        execution:
+          onSuccess:
+            - write_output docker_app_build_info_promoted_prod "backimage=\"backapp\""
+            - write_output docker_app_build_info_promoted_prod "backtag=${dockerImageTagVersion}"
+            - jfrog rt sp --build=${res_docker_app_build_info_buildName}/${res_docker_app_build_info_buildNumber} pe-docker-local/**/manifest.json "docker.tag=${dockerImageTagVersion}"
+
+      # - name: publish_helm_chart
+      #   type: HelmPublish
+      #   configuration:
+      #     helmVersion: 3
+      #     lint: true
+      #     affinityGroup: docker_group
+      #     inputResources:
+      #       - name: source_code
+      #     inputSteps:
+      #       - name: promoting_docker_build_info_app
+      #     outputResources:
+      #       - name: helm_chart_npm_app_resource
+      #     chartPath: davidpinhas/simple-reactjs-app/chart
+      #     flags: --app-version=${dockerImageTagVersion} --version 1.0.${run_number}
