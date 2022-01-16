@@ -31,7 +31,11 @@ pipelines:
             buildName: bash_npm_build_publish
             buildNumber: "1.0.${run_number}"
           runtime:
-            type: host
+            type: image
+              custom:
+                name: ubuntu
+                tag: 20.04
+                autoPull: true
           integrations: 
             - name: artifactory
             - name: pegeneric
