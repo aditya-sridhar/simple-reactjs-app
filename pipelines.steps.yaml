@@ -4,7 +4,6 @@ pipelines:
       - name: npm_build_install
         type: NpmBuild
         configuration:
-          timeoutSeconds: 240
           resolverRepo: pe-npm
           sourceLocation: .
           integrations:
