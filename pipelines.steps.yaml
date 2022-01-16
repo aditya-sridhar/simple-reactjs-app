@@ -112,7 +112,7 @@ pipelines:
           affinityGroup: docker_group
           dockerFileName: Dockerfile
           dockerFileLocation: .
-          dockerImageName: ${int_server_name_value}.jfrog.io/pe-docker/npm-app
+          dockerImageName: ${int_server_name_value}.jfrog.io/npm-app
           dockerImageTag: ${dockerImageTagVersion}
           dockerOptions: --build-arg SERVER_NAME=${int_server_name_value} --build-arg DOCKER_FRAMEWORK_VERSION=${dockerFrameworkVersion}
           inputResources:
@@ -135,7 +135,7 @@ pipelines:
         type: DockerPush
         configuration:
           affinityGroup: docker_group
-          targetRepository: pe-docker
+          targetRepository: pe-docker-local
           autoPublishBuildInfo: true
           inputSteps:
             - name: build_docker_npm_app
