@@ -32,6 +32,8 @@ pipelines:
             type: host
           environmentVariables: 
             appVersion: "1.0.${run_number}"
+            buildName: bash_npm_build_publish
+            buildNumber: "1.0.${run_number}"
           integrations: 
             - name: artifactory
             - name: pegeneric
