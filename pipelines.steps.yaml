@@ -59,6 +59,8 @@ pipelines:
         configuration:
           inputSteps:
             - name: bash_npm_build_publish
+          runtime:
+            type: host
           outputResources:
             - name: npm_app_build_info
 
