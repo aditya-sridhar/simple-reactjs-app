@@ -29,9 +29,8 @@ pipelines:
         type: Bash
         configuration: 
           environmentVariables: 
-            readOnly:
-              JFROG_CLI_BUILD_NAME: bash_npm_build_publish
-              JFROG_CLI_BUILD_NUMBER: "1.0.${run_number}"
+            JFROG_CLI_BUILD_NAME: bash_npm_build_publish
+            JFROG_CLI_BUILD_NUMBER: "1.0.${run_number}"
           runtime:
             type: host
           integrations: 
