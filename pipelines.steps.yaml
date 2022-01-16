@@ -1,3 +1,6 @@
+template: true
+valuesFilePath: ./values.yaml
+
 pipelines: 
 
 ## Using NpmBuild step will fail due to issue https://jira.jfrog.org/browse/RTDEV-25641
