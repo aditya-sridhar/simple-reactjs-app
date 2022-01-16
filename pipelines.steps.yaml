@@ -198,6 +198,6 @@ pipelines:
             - CHART_VERSION=0.0.$run_number
             - ls $res_pe_source_code_resourcePath
             - pushd $res_pe_source_code_resourcePath/npm-app-chart
-            - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" npm-app-chart/Chart.yaml"
-            - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" npm-app-chart/Chart.yaml"
+            - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
+            - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - popd
