@@ -34,7 +34,7 @@ pipelines:
             type: image
             image:
               custom:
-                name: davidp.jfrog.io/pe-docker/ubuntu
+                name: davidp-pe-docker.jfrog.io/ubuntu
                 tag: "20.04"
                 autoPull: true
           integrations: 
