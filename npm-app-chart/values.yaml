@@ -84,3 +84,11 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+runtime:
+  k8s_integration: davidp_k8s
+  namespace: davidp-webapp
+  blueReleaseName: app-blue
+  greenReleaseName: app-green
+  idleServiceName: app-idle
+  liveServiceName: app
