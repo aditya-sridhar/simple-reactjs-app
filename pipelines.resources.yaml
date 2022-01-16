@@ -1,5 +1,5 @@
 template: true
-valuesFilePath: ./npm-aap-chart/values.yml
+valuesFilePath: ./npm-app-chart/values.yml
 
 resources:
 #NPM application
