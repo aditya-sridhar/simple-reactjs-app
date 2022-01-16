@@ -1,6 +1,7 @@
 pipelines: 
 
 ## Using NpmBuild step will fail due to issue https://jira.jfrog.org/browse/RTDEV-25641
+
   # - name: npm_app_pipeline
   #   steps: 
   #     - name: npm_build_install
