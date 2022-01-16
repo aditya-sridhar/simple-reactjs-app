@@ -54,8 +54,10 @@ pipelines:
             - jfrog rt bag npm-app 1.0.${run_number}
             - jfrog rt bce npm-app 1.0.${run_number}
             - jfrog rt bp npm-app 1.0.${run_number}
-            - export buildName="bash_npm_build_publish"
-            - export buildNumber="1.0.${run_number}"
+            - add_run_variables buildName=${JFROG_CLI_BUILD_NAME} buildNumber=${JFROG_CLI_BUILD_NUMBER}
+            - add_run_variables myEnvironmentVariable=${run_id}
+            - $jfrog_cli_path rt build-collect-env
+            - add_run_files /tmp/jfrog/. jfrog
 
       - name: npm_publish_buildinfo
         type: PublishBuildInfo
