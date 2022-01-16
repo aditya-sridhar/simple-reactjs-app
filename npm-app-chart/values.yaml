@@ -7,7 +7,9 @@ image:
   registry: davidp-pe-docker.jfrog.io
   repository: npm-app
   pullPolicy: IfNotPresent
-
+imageCredentials:
+  name: registry-pull-secret
+  registry: davidp.jfrog.io
 
 imagePullSecrets: []
 nameOverride: ""
