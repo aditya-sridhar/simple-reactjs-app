@@ -96,3 +96,60 @@ pipelines:
           onSuccess:
             - write_output npm_app_build_info_propoted_prod version=${appVersion}
             - jfrog rt sp --build=${res_npm_app_build_info_buildName}/${res_npm_app_build_info_buildNumber} pe-npm-local/ "app.version=${appVersion}"
+
+#Dockerized app
+  - name: dockerized_npm_app_pipeline
+    configuration:
+      environmentVariables:
+        readOnly:
+          dockerFrameworkVersion: ${res_docker_framework_build_info_promoted_version}
+          dockerImageTagVersion: 1.0.${run_number}-${res_pe_source_code_commitSha}
+
+steps:
+      - name: build_docker_npm_app
+        type: DockerBuild
+        configuration:
+          affinityGroup: docker_group
+          dockerFileName: Dockerfile
+          dockerFileLocation: simple-reactjs-app/
+          dockerImageName: ${int_server_name_value}.jfrog.io/pe-docker/npm-app
+          dockerImageTag: ${dockerImageTagVersion}
+          dockerOptions: --build-arg SERVER_NAME=${int_server_name_value} --build-arg DOCKER_FRAMEWORK_VERSION=${dockerFrameworkVersion}
+          inputResources:
+            - name: pe_source_code
+            - name: npm_app_build_info_propoted_prod
+            - name: docker_framework_build_info_promoted
+#            - name: npm_app_package
+          integrations:
+            - name: artifactory
+            - name: docker
+            - name: server_name
+        execution:
+          onStart:
+            - add_pipeline_variables appVersion="${res_build_info_npm_app_promoted_staging_version}"
+            - add_pipeline_variables triggerBuildInfoName="${res_build_info_npm_app_promoted_staging_buildName}"
+            - add_pipeline_variables triggerBuildInfoNumber="${res_build_info_npm_app_promoted_staging_buildNumber}"
+            - add_pipeline_variables myDockerTag="${dockerImageTagVersion}"
+
+      - name: publish_docker_npm_app
+        type: DockerPush
+        configuration:
+          affinityGroup: docker_group
+          targetRepository: pe-docker
+          autoPublishBuildInfo: true
+          inputSteps:
+            - name: build_docker_npm_app
+          integrations:
+            - name: artifactory
+          outputResources:
+            - name: docker_app_build_info
+
+      - name: xray_scan_docker_build_info_npm_app
+        type: XrayScan
+        configuration:
+          affinityGroup: docker_group
+          failOnScan: true
+          inputSteps:
+            - name: publish_docker_npm_app
+          inputResources:
+            - name: docker_app_build_info
