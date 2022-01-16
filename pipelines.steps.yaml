@@ -191,13 +191,13 @@ pipelines:
             - name: promoting_docker_build_info_app
           outputResources:
             - name: helm_chart_npm_app_resource
-          chartPath: davidpinhas/simple-reactjs-app/chart
+          chartPath: davidpinhas/simple-reactjs-app/npm-app-chart
           flags: --app-version=${dockerImageTagVersion} --version 1.0.${run_number}
         execution:
           onStart:
             - CHART_VERSION=0.0.$run_number
             - ls $res_pe_source_code_resourcePath
-            - pushd $res_pe_source_code_resourcePath/npm-app-chart/chart
+            - pushd $res_pe_source_code_resourcePath/npm-app-chart
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - popd
