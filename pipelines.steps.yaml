@@ -105,7 +105,7 @@ pipelines:
           dockerFrameworkVersion: ${res_docker_framework_build_info_promoted_version}
           dockerImageTagVersion: 1.0.${run_number}-${res_pe_source_code_commitSha}
 
-steps:
+    steps:
       - name: build_docker_npm_app
         type: DockerBuild
         configuration:
