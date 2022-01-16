@@ -196,6 +196,7 @@ pipelines:
         execution:
           onStart:
             - CHART_VERSION=0.0.$run_number
+            - ls $res_app_gitrepo_resourcePath
             - pushd $res_app_gitrepo_resourcePath/npm-app-chart/chart
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
