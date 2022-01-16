@@ -111,7 +111,7 @@ pipelines:
         configuration:
           affinityGroup: docker_group
           dockerFileName: Dockerfile
-          dockerFileLocation: simple-reactjs-app/
+          dockerFileLocation: .
           dockerImageName: ${int_server_name_value}.jfrog.io/pe-docker/npm-app
           dockerImageTag: ${dockerImageTagVersion}
           dockerOptions: --build-arg SERVER_NAME=${int_server_name_value} --build-arg DOCKER_FRAMEWORK_VERSION=${dockerFrameworkVersion}
