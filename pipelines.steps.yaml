@@ -50,6 +50,7 @@ pipelines:
             - printenv int_pegeneric_user
             - printenv int_pegeneric_password
             - printenv int_pegeneric_server
+            - cat ~/.jfrog/jfrog-cli.conf.v5
             - git clone https://github.com/davidpinhas/simple-reactjs-app.git
             - cd simple-reactjs-app
             - bash artifactory-config.sh
