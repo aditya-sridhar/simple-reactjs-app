@@ -214,7 +214,7 @@ pipelines:
           environmentVariables:
             DESIRED_VERSION: v3.2.1
           integrations:
-            - name: davidp_gpc_k8s
+            - name: davidp_gcp_k8s
         execution:
           onStart:
             - curl -LO https://git.io/get_helm.sh
