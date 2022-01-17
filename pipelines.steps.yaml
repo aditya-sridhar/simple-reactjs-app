@@ -208,39 +208,59 @@ pipelines:
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - popd
 
-      - name: helm_blue_green_deploy
-        type: HelmBlueGreenDeploy
+      - name: helm_deploy
+        type: Bash
         configuration:
-          helmVersion: 3
-          namespace: davidp-webapp
-          blueReleaseName: app-blue
-          blueFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
-          greenReleaseName: app-green
-          greenFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
-          roleServices:
-            - liveName: app
-              blueReferenceName: blue-app
-              greenReferenceName: green-app
-              idleName: app-idle
+          environmentVariables:
+            DESIRED_VERSION: v3.2.1
           integrations:
-            - name: davidp_gcp_k8s
-          inputResources:
-            - name: helm_chart_npm_app_resource
+            - name: davidp_gpc_k8s
+        execution:
+          onStart:
+            - curl -LO https://git.io/get_helm.sh
+            - chmod 700 get_helm.sh
+            - ./get_helm.sh
+            - helm repo add jfrog https://charts.jfrog.io/
+            - helm repo update
+            - curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+            - chmod 700 kubectl
+          onExecute:
+            - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project vfrog-project
+            - kubectl version
 
-      - name: helm_blue_green_role_switch
-        type: HelmBlueGreenRoleSwitch
-        configuration:
-          deployStep: helm_blue_green_deploy
-          integrations:
-            - name: davidp_gcp_k8s
-          inputSteps:
-            - name: helm_blue_green_deploy
+      # - name: helm_blue_green_deploy
+      #   type: HelmBlueGreenDeploy
+      #   configuration:
+      #     helmVersion: 3
+      #     namespace: davidp-webapp
+      #     blueReleaseName: app-blue
+      #     blueFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
+      #     greenReleaseName: app-green
+      #     greenFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
+      #     roleServices:
+      #       - liveName: app
+      #         blueReferenceName: blue-app
+      #         greenReferenceName: green-app
+      #         idleName: app-idle
+      #     integrations:
+      #       - name: davidp_gcp_k8s
+      #     inputResources:
+      #       - name: helm_chart_npm_app_resource
 
-      - name: helm_blue_green_cleanup
-        type: HelmBlueGreenCleanup
-        configuration:
-          deployStep: helm_blue_green_deploy
-          integrations:
-            - name: davidp_gcp_k8s
-          inputSteps:
-            - name: helm_blue_green_role_switch
+      # - name: helm_blue_green_role_switch
+      #   type: HelmBlueGreenRoleSwitch
+      #   configuration:
+      #     deployStep: helm_blue_green_deploy
+      #     integrations:
+      #       - name: davidp_gcp_k8s
+      #     inputSteps:
+      #       - name: helm_blue_green_deploy
+
+      # - name: helm_blue_green_cleanup
+      #   type: HelmBlueGreenCleanup
+      #   configuration:
+      #     deployStep: helm_blue_green_deploy
+      #     integrations:
+      #       - name: davidp_gcp_k8s
+      #     inputSteps:
+      #       - name: helm_blue_green_role_switch
