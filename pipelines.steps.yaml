@@ -223,7 +223,7 @@ pipelines:
               greenReferenceName: green-app
               idleName: app-idle
           integrations:
-            - name: davidp_k8s
+            - name: davidp_gcp_k8s
           inputResources:
             - name: helm_chart_npm_app_resource
 
@@ -232,7 +232,7 @@ pipelines:
         configuration:
           deployStep: helm_blue_green_deploy
           integrations:
-            - name: davidp_k8s
+            - name: davidp_gcp_k8s
           inputSteps:
             - name: helm_blue_green_deploy
 
@@ -241,6 +241,6 @@ pipelines:
         configuration:
           deployStep: helm_blue_green_deploy
           integrations:
-            - name: davidp_k8s
+            - name: davidp_gcp_k8s
           inputSteps:
             - name: helm_blue_green_role_switch
