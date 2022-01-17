@@ -213,8 +213,12 @@ pipelines:
         configuration:
           environmentVariables:
             DESIRED_VERSION: v3.2.1
+          inputSteps:
+            - name: publish_helm_chart
           integrations:
             - name: davidp_gcp_k8s
+          inputResources:
+            - name: helm_chart_npm_app_resource
         execution:
           onStart:
             - curl -LO https://git.io/get_helm.sh
