@@ -216,6 +216,7 @@ pipelines:
           inputSteps:
             - name: publish_helm_chart
           integrations:
+            - name: pegeneric
             - name: davidp_gcp_k8s
           inputResources:
             - name: helm_chart_npm_app_resource
@@ -229,7 +230,8 @@ pipelines:
             - curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
             - chmod 700 kubectl
           onExecute:
-            - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project vfrog-project
+            - printenv int_pegeneric_k8s_project
+            - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
             - kubectl version
 
       # - name: helm_blue_green_deploy
