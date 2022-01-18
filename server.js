@@ -7,7 +7,7 @@ const HOST = '0.0.0.0';
 
 const app = express();
 app.get('/', (req, res) => {
-  res.send('Hello Adi!');
+  res.send('Test1');
 });
 app.get('/health-check',(req,res)=> {
   res.send ("Health check passed");
