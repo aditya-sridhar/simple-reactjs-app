@@ -234,7 +234,8 @@ pipelines:
           onExecute:
             - printenv int_pegeneric_k8s_project
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
-            - kubectl version
+            - cd npm-app-chart
+            - helm upgrade --install vfrog-webapp --namespace vfrog-npm-app --create-namespace ./
 
       # - name: helm_blue_green_deploy
       #   type: HelmBlueGreenDeploy
