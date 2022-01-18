@@ -56,12 +56,21 @@ resources:
       buildName: docker_app
       buildNumber: '${run_number}'
   
-  - name: docker_app_image
+  # - name: docker_app_image
+  #   type: Image
+  #   configuration:
+  #     registry: docker
+  #     sourceRepository: pe-docker
+  #     imageName: davidp-pe-docker.jfrog.io/npm-app
+  #     imageTag: latest
+  #     autoPull: true
+
+  - name: docker_app_image1
     type: Image
     configuration:
       registry: docker
       sourceRepository: pe-docker
-      imageName: {{ .Values.image.repository}}
+      imageName: davidp-pe-docker.jfrog.io/npm-app
       imageTag: latest
       autoPull: true
 

@@ -149,7 +149,7 @@ pipelines:
             - name: artifactory
           outputResources:
             - name: docker_app_build_info
-            - name: docker_app_image
+            - name: docker_app_image1
 
       - name: xray_scan_docker_build_info_npm_app
         type: XrayScan
