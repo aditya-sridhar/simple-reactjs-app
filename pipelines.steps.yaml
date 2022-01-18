@@ -124,7 +124,6 @@ pipelines:
           inputResources:
             - name: pe_source_code
             - name: npm_app_build_info_propoted_prod
-              trigger: true
             - name: docker_framework_build_info_promoted
 #            - name: npm_app_package
           integrations:
