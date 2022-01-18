@@ -238,6 +238,7 @@ pipelines:
             - helm repo update
             - echo ${dockerImageTagVersion}
             - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+/.tgz/g')
+            - echo $helmVersion
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
             - helm upgrade --install --set image.tag=npm-app-chart-$helmVersion vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app
 
