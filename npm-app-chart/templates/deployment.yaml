@@ -20,9 +20,9 @@ spec:
       labels:
         {{- include "npm-app-chart.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+      - name: {{ .Values.imagePullSecrets }}
       {{- end }}
       serviceAccountName: {{ include "npm-app-chart.serviceAccountName" . }}
       securityContext:
