@@ -5,8 +5,8 @@ containerPortHttps: 8443
 
 image:
   registry: davidp-pe-docker.jfrog.io
-  repository: davidp-pe-docker.jfrog.io/pe-node-web-app
-  tag: latest
+  repository: davidp-pe-docker.jfrog.io/npm-app
+  tag: ${dockerImageTagVersion}
   pullPolicy: IfNotPresent
 
 # imageCredentials:
