@@ -56,16 +56,7 @@ resources:
       buildName: docker_app
       buildNumber: '${run_number}'
   
-  - name: docker_app_image
-    type: Image
-    configuration:
-      registry: docker
-      sourceRepository: pe-docker
-      imageName: davidp-pe-docker.jfrog.io/npm-app
-      imageTag: latest
-      autoPull: true
-
-  # - name: docker_app_image1
+  # - name: docker_app_image
   #   type: Image
   #   configuration:
   #     registry: docker
@@ -73,6 +64,15 @@ resources:
   #     imageName: davidp-pe-docker.jfrog.io/npm-app
   #     imageTag: latest
   #     autoPull: true
+
+  - name: docker_app_image1
+    type: Image
+    configuration:
+      registry: docker
+      sourceRepository: pe-docker
+      imageName: davidp-pe-docker.jfrog.io/npm-app
+      imageTag: latest
+      autoPull: true
 
   - name: helm_chart_npm_app_resource
     type: HelmChart
