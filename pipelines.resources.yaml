@@ -61,7 +61,7 @@ resources:
     configuration:
       registry: docker
       sourceRepository: pe-docker
-      imageName: davidp-pe-docker.jfrog.io/npm-app
+      imageName: davidp.jfrog.io/pe-docker/npm-app
       imageTag: latest
       autoPull: true
 
