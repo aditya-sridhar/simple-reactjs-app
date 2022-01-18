@@ -237,10 +237,10 @@ pipelines:
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
             - helm repo update
             - echo ${dockerImageTagVersion}
-            - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+/.tgz/g')
+            - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+//g')
             - echo $helmVersion
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
-            - helm upgrade --install --set image.tag=npm-app-chart-$helmVersion vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app
+            - helm upgrade --install --set image.tag=$helmVersion vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app-chart
 
       # - name: helm_blue_green_deploy
       #   type: HelmBlueGreenDeploy
