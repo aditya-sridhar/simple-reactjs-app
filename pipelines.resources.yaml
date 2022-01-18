@@ -65,7 +65,7 @@ resources:
   #     imageTag: latest
   #     autoPull: true
 
-  - name: docker_app_image1
+  - name: docker_app_image2
     type: Image
     configuration:
       registry: docker
