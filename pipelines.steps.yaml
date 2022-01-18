@@ -234,7 +234,7 @@ pipelines:
             - printenv int_pegeneric_user
             - printenv int_pegeneric_password
             - printenv int_pegeneric_server
-            - find npm-app-chart/values.yaml -type f -exec sed -i -e "s|tag:|tag: ${dockerImageTagVersion}${res_pe_source_code_commitSha}|g" {} \;
+            - bash helm-docker-tag.sh
             - cat npm-app-chart/values.yaml
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
             - helm repo update
