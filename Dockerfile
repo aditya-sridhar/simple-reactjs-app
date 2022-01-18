@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install --global npm node-gyp
+RUN npm install --global npm node-gyp express
 
 COPY . .
 
