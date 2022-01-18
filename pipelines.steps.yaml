@@ -215,7 +215,6 @@ pipelines:
         configuration:
           environmentVariables:
             DESIRED_VERSION: v3.2.1
-          affinityGroup: docker_group
           inputSteps:
             - name: publish_helm_chart
           integrations:
