@@ -242,6 +242,7 @@ pipelines:
             - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+//g')
             - echo $helmVersion
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
+            - kubectl create secret docker-registry regcred --docker-server=$int_pegeneric_server-pe-docker.jfrog.io --docker-username=$int_pegeneric_user --docker-password=$int_pegeneric_password --docker-email=davidp@jfrog.com
             - helm upgrade --install --set image.tag=$helmVersion vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app-chart
 
       # - name: helm_blue_green_deploy
