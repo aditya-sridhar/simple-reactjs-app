@@ -207,6 +207,7 @@ pipelines:
             - ls $res_pe_source_code_resourcePath
             - pushd $res_pe_source_code_resourcePath/npm-app-chart
             - "ls -lah"
+            - "bash helm-docker-tag.sh"
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - popd
@@ -236,7 +237,6 @@ pipelines:
             - printenv int_pegeneric_password
             - printenv int_pegeneric_server
             - ls -lah
-            - bash helm-docker-tag.sh
             - cat npm-app-chart/values.yaml
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
             - helm repo update
