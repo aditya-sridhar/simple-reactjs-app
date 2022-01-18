@@ -125,8 +125,8 @@ pipelines:
             - name: pe_source_code
               trigger: false
             - name: npm_app_build_info_propoted_prod
-              trigger: true
             - name: docker_framework_build_info_promoted
+              trigger: true
           integrations:
             - name: artifactory
             - name: docker
