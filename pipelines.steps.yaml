@@ -237,6 +237,9 @@ pipelines:
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
             - helm repo update
             - echo ${dockerImageTagVersion}
+            - echo ${res_build_info_npm_app_promoted_staging_buildName}
+            - echo ${res_build_info_npm_app_promoted_staging_buildNumber}
+            - echo ${res_build_info_npm_app_promoted_staging_version}
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
             - helm upgrade --install --set image.tag=${dockerImageTagVersion} vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app
 
