@@ -123,8 +123,8 @@ pipelines:
           dockerOptions: --build-arg SERVER_NAME=${int_server_name_value} --build-arg DOCKER_FRAMEWORK_VERSION=${dockerFrameworkVersion}
           inputResources:
             - name: pe_source_code
-              trigger: false
             - name: npm_app_build_info_propoted_prod
+              trigger: true
             - name: docker_framework_build_info_promoted
 #            - name: npm_app_package
           integrations:
