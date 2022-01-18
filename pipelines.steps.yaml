@@ -137,6 +137,7 @@ pipelines:
             - add_pipeline_variables triggerBuildInfoName="${res_build_info_npm_app_promoted_staging_buildName}"
             - add_pipeline_variables triggerBuildInfoNumber="${res_build_info_npm_app_promoted_staging_buildNumber}"
             - add_pipeline_variables myDockerTag="${dockerImageTagVersion}"
+            - "bash helm-docker-tag.sh"
 
       - name: publish_docker_npm_app
         type: DockerPush
@@ -206,6 +207,7 @@ pipelines:
             - CHART_VERSION=0.0.$run_number
             - ls $res_pe_source_code_resourcePath
             - pushd $res_pe_source_code_resourcePath/npm-app-chart
+            - "ls -lah"
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - popd
@@ -234,6 +236,7 @@ pipelines:
             - printenv int_pegeneric_user
             - printenv int_pegeneric_password
             - printenv int_pegeneric_server
+            - ls -lah
             - bash helm-docker-tag.sh
             - cat npm-app-chart/values.yaml
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
