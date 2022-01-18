@@ -195,6 +195,7 @@ pipelines:
           # affinityGroup: docker_group
           inputResources:
             - name: pe_source_code
+              trigger: false
           inputSteps:
             - name: promoting_docker_build_info_app
           outputResources:
