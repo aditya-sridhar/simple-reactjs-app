@@ -137,7 +137,6 @@ pipelines:
             - add_pipeline_variables triggerBuildInfoName="${res_build_info_npm_app_promoted_staging_buildName}"
             - add_pipeline_variables triggerBuildInfoNumber="${res_build_info_npm_app_promoted_staging_buildNumber}"
             - add_pipeline_variables myDockerTag="${dockerImageTagVersion}"
-            - "bash helm-docker-tag.sh"
 
       - name: publish_docker_npm_app
         type: DockerPush
