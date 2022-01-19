@@ -13,8 +13,7 @@ image:
 #   name: regcred
 #   registry: davidp-pe-docker.jfrog.io
 
-imagePullSecrets: 
-- name: regcred
+imagePullSecrets: regcred
 nameOverride: ""
 fullnameOverride: ""
 
