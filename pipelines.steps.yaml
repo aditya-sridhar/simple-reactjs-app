@@ -210,6 +210,7 @@ pipelines:
             - "bash helm-docker-tag.sh"
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
+            - "cat values.yaml"
             - popd
 
       - name: helm_deploy
@@ -238,9 +239,9 @@ pipelines:
             - printenv int_pegeneric_server
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
             - helm repo update
-            - echo ${dockerImageTagVersion}
-            - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+//g')
-            - echo $helmVersion
+            # - echo ${dockerImageTagVersion}
+            # - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+//g')
+            # - echo $helmVersion
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
             - helm upgrade --install --set image.tag=$helmVersion vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app-chart
 
