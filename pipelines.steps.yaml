@@ -204,11 +204,11 @@ pipelines:
         execution:
           onStart:
             - CHART_VERSION=0.0.$run_number
-            - ls $res_pe_source_code_resourcePath
+#            - ls $res_pe_source_code_resourcePath
             - pushd $res_pe_source_code_resourcePath/npm-app-chart
-            - "ls -lah"
+#            - "ls -lah"
             - "bash helm-docker-tag.sh"
-            - "echo $res_pe_source_code_commitSha"
+#            - "echo $res_pe_source_code_commitSha"
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - "cat values.yaml"
@@ -244,7 +244,7 @@ pipelines:
             # - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+//g')
             # - echo $helmVersion
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
-            - helm upgrade --install --set image.tag=$helmVersion vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app-chart
+            - helm upgrade --install vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app-chart
 
       # - name: helm_blue_green_deploy
       #   type: HelmBlueGreenDeploy
