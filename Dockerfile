@@ -16,9 +16,8 @@ RUN npm install --save express
 
 COPY . .
 
-ENV PORT 3000
+ENV PORT 8080
 
-EXPOSE 3000
 EXPOSE 8080
 EXPOSE 443
 EXPOSE 80
