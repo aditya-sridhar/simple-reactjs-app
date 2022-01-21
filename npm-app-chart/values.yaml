@@ -1,6 +1,6 @@
 replicaCount: 1
 
-containerPort: 3000
+containerPort: 8080
 containerPortHttps: 8443
 
 image:
@@ -93,6 +93,6 @@ service:
   type: LoadBalancer
   port: 80
   portHttps: 443
-  internalPort: 3000
+  internalPort: 8080
   externalPort: 80
   externalTrafficPolicy: Cluster
