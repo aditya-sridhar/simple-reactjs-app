@@ -1,15 +1,31 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "npm-app-chart.fullname" . }}
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
   labels:
-    {{- include "npm-app-chart.labels" . | nindent 4 }}
+    app.kubernetes.io/instance: vfrog-webapp
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: npm-app-chart
+    app.kubernetes.io/version: 1.16.0
+    helm.sh/chart: npm-app-chart-0.0.1
+  name: vfrog-webapp-npm-app-chart
+  namespace: vfrog-npm-app
 spec:
-  type: {{ .Values.service.type }}
   ports:
-    - port: 80
-      targetPort: http
-      protocol: TCP
-      name: http
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
   selector:
-    {{- include "npm-app-chart.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/instance: vfrog-webapp
+    app.kubernetes.io/name: npm-app-chart
+
+  # type: NodePort
+  # loadBalancerIP: $IP
+  # ipFamilies:
+  # - IPv4
+  # ipFamilyPolicy: SingleStack
+  # sessionAffinity: None
+  # type: ClusterIP
+# status:
+#   loadBalancer: {}

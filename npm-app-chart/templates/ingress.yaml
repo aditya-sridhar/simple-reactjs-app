@@ -1,61 +1,31 @@
-{{- if .Values.ingress.enabled -}}
-{{- $fullName := include "npm-app-chart.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
-{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
-  {{- end }}
-{{- end }}
-{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
-{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
-  labels:
-    {{- include "npm-app-chart.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+  name: vfrog-npm-app-ingress
   annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: "letsencrypt-prod"
+#    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+#    kubernetes.io/ingress.global-static-ip-name: "vfrog-webapp-npm-app-chart"
+#    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+#    nginx.ingress.kubernetes.io/auth-tls-secret: "vfrog-npm-app/tls-secret"
+#    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+#    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+#    cert-manager.io/issuer: "letsencrypt-staging"
+
 spec:
-  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.ingress.className }}
-  {{- end }}
-  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.ingress.tls }}
-    - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-        {{- end }}
-      secretName: {{ .secretName }}
-    {{- end }}
-  {{- end }}
+  - hosts:
+    - pe-task-demo.duckdns.org
+    secretName: vfrog-tls-secret
   rules:
-    {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
-      http:
-        paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
-              {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
-              {{- end }}
-          {{- end }}
-    {{- end }}
-{{- end }}
+  - host: pe-task-demo.duckdns.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vfrog-webapp-npm-app-chart
+            port:
+              number: 8080
