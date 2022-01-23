@@ -1,6 +1,6 @@
 gitRepo:
   gitProvider: peGitHub
-  path: davidpinhas/simple-reactjs-app 
+  path: davidpinhas/simple-express-app 
   branch: master
 
 appImage:

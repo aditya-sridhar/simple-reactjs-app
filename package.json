@@ -1,5 +1,5 @@
 {
-  "name": "simple-reactjs-app",
+  "name": "simple-express-app",
   "version": "1.0.0",
   "description": "This is an example description!",
   "main": "server.js",
