@@ -14,7 +14,7 @@ Refer to https://nodejs.org/en/ to install nodejs
 3. Start the application
 
 ```
-git clone https://github.com/aditya-sridhar/simple-express-app.git
+git clone https://github.com/davidpinhas/simple-express-app.git
 npm install
 node server.js
 ```
