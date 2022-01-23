@@ -1,4 +1,4 @@
-# PE Assignment React JS Project
+# PE Assignment Express Project
 ## What is the use of this Repo
 This Project is a Simple Express Project
 The project Template can be used to build bigger projects
@@ -8,7 +8,7 @@ The project Template can be used to build bigger projects
 ### Install Node JS
 Refer to https://nodejs.org/en/ to install nodejs
 
-## Tesing the React app locally
+## Tesing the Express app locally
 1. Clone the repository
 2. Install the dependencies
 3. Start the application
