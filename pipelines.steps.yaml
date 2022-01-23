@@ -108,7 +108,7 @@ pipelines:
     configuration:
       environmentVariables:
         readOnly:
-          dockerFrameworkVersion: ${res_docker_framework_build_info_promoted_version}
+          # dockerFrameworkVersion: ${res_docker_framework_build_info_promoted_version}
           dockerImageTagVersion: 1.0.${run_number}
 
     steps:
@@ -125,7 +125,7 @@ pipelines:
             - name: pe_source_code
               trigger: false
             - name: npm_app_build_info_propoted_prod
-            - name: docker_framework_build_info_promoted
+            # - name: docker_framework_build_info_promoted
               trigger: true
           integrations:
             - name: artifactory
