@@ -1,27 +1,5 @@
 pipelines: 
-
-## Using NpmBuild step will fail due to issue https://jira.jfrog.org/browse/RTDEV-25641
-  #     - name: npm_build_install
-  #       type: NpmBuild
-  #       configuration:
-  #         resolverRepo: pe-npm
-  #         sourceLocation: .
-  #         integrations:
-  #           - name: artifactory
-  #         inputResources:
-  #           - name: pe_source_code
-   
-  #     - name: npm_build_publish
-  #       type: NpmPublish
-  #       configuration:
-  #         deployerRepo: pe-npm-local
-  #         integrations:
-  #           - name: artifactory
-  #         inputSteps:
-  #           - name: npm_build_install
-  #         outputResources:
-  #           - name: npm_app_build_info
-
+#Build NPM app
   - name: npm_app_pipeline
     steps:    
       - name: bash_npm_build_publish
@@ -32,12 +10,6 @@ pipelines:
             buildNumber: "1.0.${run_number}"
           runtime:
             type: host
-            # type: image
-            # image:
-            #   custom:
-            #     name: registry-1.docker.io/ubuntu
-            #     tag: "20.04"
-            #     autoPull: true
           integrations: 
             - name: artifactory
             - name: pegeneric
@@ -53,7 +25,6 @@ pipelines:
             - git clone https://github.com/davidpinhas/simple-express-app.git
             - cd simple-express-app
             - bash artifactory-config.sh
-#            - if ! grep $int_pegeneric_server  ~/.jfrog/jfrog-cli.conf.v5; then jfrog config add $int_pegeneric_server --artifactory-url https://$int_pegeneric_server.jfrog.io/artifactory --user $int_pegeneric_user --password $int_pegeneric_password --interactive=false; fi
             - jfrog rt npm-config --server-id-resolve $int_pegeneric_server --server-id-deploy $int_pegeneric_server --repo-resolve pe-npm-remote --repo-deploy pe-npm-local
             - jfrog rt npmi --build-name=npm-app --build-number=1.0.${run_number}
             - jfrog rt bag npm-app 1.0.${run_number}
@@ -108,7 +79,6 @@ pipelines:
     configuration:
       environmentVariables:
         readOnly:
-          # dockerFrameworkVersion: ${res_docker_framework_build_info_promoted_version}
           dockerImageTagVersion: 1.0.${run_number}
 
     steps:
@@ -125,7 +95,6 @@ pipelines:
             - name: pe_source_code
               trigger: false
             - name: npm_app_build_info_propoted_prod
-            # - name: docker_framework_build_info_promoted
               trigger: true
           integrations:
             - name: artifactory
@@ -192,7 +161,6 @@ pipelines:
           helmVersion: 3
           lint: true
           chartPath: "./npm-app-chart"
-          # affinityGroup: docker_group
           inputResources:
             - name: pe_source_code
               trigger: false
@@ -204,11 +172,8 @@ pipelines:
         execution:
           onStart:
             - CHART_VERSION=0.0.$run_number
-#            - ls $res_pe_source_code_resourcePath
             - pushd $res_pe_source_code_resourcePath/npm-app-chart
-#            - "ls -lah"
             - "bash helm-docker-tag.sh"
-#            - "echo $res_pe_source_code_commitSha"
             - "sed -ie \"s/^version: .*$/version: $CHART_VERSION/\" Chart.yaml"
             - "sed -ie \"s/^appVersion: .*$/appVersion: $CHART_VERSION/\" Chart.yaml"
             - "cat values.yaml"
@@ -240,45 +205,5 @@ pipelines:
             - printenv int_pegeneric_server
             - helm repo add pe-helm https://$int_pegeneric_server.jfrog.io/artifactory/api/helm/pe-helm --username $int_pegeneric_user --password $int_pegeneric_password
             - helm repo update
-            # - echo ${dockerImageTagVersion}
-            # - export helmVersion=$(echo "$dockerImageTagVersion" | sed -r 's/[-]+//g')
-            # - echo $helmVersion
             - gcloud container clusters get-credentials vfrog-webapp-cluster --zone europe-west1-b --project $int_pegeneric_k8s_project
             - helm upgrade --install vfrog-webapp --namespace vfrog-npm-app --create-namespace pe-helm/npm-app-chart
-
-      # - name: helm_blue_green_deploy
-      #   type: HelmBlueGreenDeploy
-      #   configuration:
-      #     helmVersion: 3
-      #     namespace: davidp-webapp
-      #     blueReleaseName: app-blue
-      #     blueFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
-      #     greenReleaseName: app-green
-      #     greenFlags: "--set image.registry='davidp-pe-docker.jfrog.io'"
-      #     roleServices:
-      #       - liveName: app
-      #         blueReferenceName: blue-app
-      #         greenReferenceName: green-app
-      #         idleName: app-idle
-      #     integrations:
-      #       - name: davidp_gcp_k8s
-      #     inputResources:
-      #       - name: helm_chart_npm_app_resource
-
-      # - name: helm_blue_green_role_switch
-      #   type: HelmBlueGreenRoleSwitch
-      #   configuration:
-      #     deployStep: helm_blue_green_deploy
-      #     integrations:
-      #       - name: davidp_gcp_k8s
-      #     inputSteps:
-      #       - name: helm_blue_green_deploy
-
-      # - name: helm_blue_green_cleanup
-      #   type: HelmBlueGreenCleanup
-      #   configuration:
-      #     deployStep: helm_blue_green_deploy
-      #     integrations:
-      #       - name: davidp_gcp_k8s
-      #     inputSteps:
-      #       - name: helm_blue_green_role_switch

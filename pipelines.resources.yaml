@@ -1,8 +1,6 @@
 template: true
 valuesFilePath: ./npm-app-chart/values.yaml
-
 resources:
-#NPM application
   - name: pe_source_code
     type: GitRepo
     configuration:
@@ -32,15 +30,6 @@ resources:
       buildName: npm_app_pipeline
       buildNumber: '${run_number}'
 
-# Dockerizing NPM application
-#  - name: npm_app_package
-#    type: FileSpec
-#    configuration:
-#      sourceArtifactory: artifactory
-#      pattern: 'pe-npm-local/simple-express-app/*/simple-express-app-*.tgz'
-#      target: package/simple-express-app-*.tgz
-#      flat: true
-
   - name: docker_app_build_info
     type: BuildInfo
     configuration:
@@ -54,15 +43,6 @@ resources:
       sourceArtifactory: artifactory
       buildName: docker_app
       buildNumber: '${run_number}'
-  
-  # - name: docker_app_image
-  #   type: Image
-  #   configuration:
-  #     registry: docker
-  #     sourceRepository: pe-docker
-  #     imageName: davidp-pe-docker.jfrog.io/npm-app
-  #     imageTag: latest
-  #     autoPull: true
 
   - name: docker_app_image2
     type: Image
