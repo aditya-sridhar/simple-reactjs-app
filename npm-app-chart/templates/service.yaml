@@ -19,13 +19,3 @@ spec:
   selector:
     app.kubernetes.io/instance: vfrog-webapp
     app.kubernetes.io/name: npm-app-chart
-
-  # type: NodePort
-  # loadBalancerIP: $IP
-  # ipFamilies:
-  # - IPv4
-  # ipFamilyPolicy: SingleStack
-  # sessionAffinity: None
-  # type: ClusterIP
-# status:
-#   loadBalancer: {}

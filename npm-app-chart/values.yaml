@@ -1,36 +1,25 @@
 replicaCount: 1
-
 containerPort: 8080
 containerPortHttps: 8443
-
 image:
   registry: davidp-pe-docker.jfrog.io
   repository: davidp-pe-docker.jfrog.io/npm-app
   tag: 
-#  pullPolicy: IfNotPresent
-
 imagePullSecrets: vfrog-regcred
 nameOverride: ""
 fullnameOverride: ""
-
 serviceAccount:
   create: true
   annotations: {}
   name: ""
-
 podAnnotations: {}
-
 podSecurityContext: {}
-
 securityContext: {}
-
 ingress:
   enabled: true
-
 selectorLabels:
   app: vfrog-webapp-npm-app-chart
   app.kubernetes.io/instance: vfrog-webapp
-
 resources:
   limits:
     cpu: 100m
@@ -38,20 +27,15 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-
 autoscaling:
   enabled: true
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: {}
-
 runtime:
   k8s_integration: davidp_k8s
   namespace: davidp-webapp
