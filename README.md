@@ -3,6 +3,7 @@
 ## What is the use of this Repo
 
 This Project is a Simple ReactJS Project which demonstrates the following
+
 1. Creating a Component in React
 2. Making HTTP calls
 3. Communicating between parent and child component
@@ -14,19 +15,23 @@ The project Template can be used to build bigger projects
 ## Live Application URL
 
 ### https://aditya-sridhar.github.io/simple-reactjs-app
+
 This URL has the application deployed in
 
 ## Prerequisites
 
 ### Install Node JS
+
 Refer to https://nodejs.org/en/ to install nodejs
 
 ### Install create-react-app
+
 Install create-react-app npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install create-react-app
 
 ```bash
 npm install -g create-react-app
 ```
+
 ## Live Application URL
 
 The Application is deployed in https://aditya-sridhar.github.io/simple-reactjs-app
@@ -57,7 +62,7 @@ The Application Runs on **localhost:3000**
 
 1. **Customers** Component : This Component displays a list of customers. This Component gets the data from a json file in assets folder
 
-2. **CustomerDetails** Component : This Component Displays the details of the selected customer. This Component gets its data from a json file in assets folder as well. This Component is the Child Component of *Customers* Component
+2. **CustomerDetails** Component : This Component Displays the details of the selected customer. This Component gets its data from a json file in assets folder as well. This Component is the Child Component of _Customers_ Component
 
 #### HTTP client
 
@@ -65,7 +70,7 @@ The Application Runs on **localhost:3000**
 
 #### URL
 
-The application has just one url /customerlist which ties to *Customers* Component
+The application has just one url /my-leadership-board
 
 ## Resources
 

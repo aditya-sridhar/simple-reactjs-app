@@ -3,26 +3,139 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 300px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  background-image: url("Ellipse18.png");
+  margin-left: -50px;
+  height: 700px;
+
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 3.5em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.Card-row{
+  display: flex; 
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: center;
+}
+
+.App-bitmoji{
+  height: 80%;
+
+} 
+
+.bitmojis {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  height: 400px;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+  margin: 1%;
+  
+}
+
+.bitmojis:hover{
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+  top: -4px;
+  border: 3px solid #EE82EE;
+  background-color: white;
+
 }
 
 .App-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
+.title-word {
+  animation: color-animation 4s linear infinite;
+}
+
+.title-word-1 {
+  --color-1: #d45d79;
+  --color-2: #307470;
+  --color-3: #DBAD4A;
+}
+
+.title-word-2 {
+  --color-1: #DBAD4A;
+  --color-2: #d45d79;
+  --color-3: #307470;
+}
+
+.title-word-3 {
+  --color-1: #307470;
+  --color-2: #DBAD4A;
+  --color-3: #d45d79;
+}
+
+.bitmojiTitle {
+  font-size: 1.5em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #307470;
+}
+
+.Section2 {
+  margin-top: 150px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #E6E6FA;
+}
+
+.Section3 {
+  margin-top: 70px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+}
+
+.Section4 {
+  background-color: #B9D9EB;
+  margin-top: 150px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.Section5 {
+  margin-top: 150px;
+}
+
+
+.testTitle {
+  font-size: 2.5em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: black;
+}
+
+@keyframes color-animation {
+  0%    {color: var(--color-1)}
+  32%   {color: var(--color-1)}
+  33%   {color: var(--color-2)}
+  65%   {color: var(--color-2)}
+  66%   {color: var(--color-3)}
+  99%   {color: var(--color-3)}
+  100%  {color: var(--color-1)}
+}
+
+
+/* @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */
