@@ -1,12 +1,12 @@
 {
 	"id": 4,
-	"name": "Orzel",
-	"email": "email@testemail.com",
-	"phone": "555544443",
-	"city": "Bing",
-	"state": "Chiling",
-	"country": "Japan",
-	"organization": "Ice Cream",
-	"jobProfile": "reviewing ice cream",
-	"additionalInfo": "likes ice cream"
+	"name": "Trevor",
+	"email": "philips@test.com",
+	"phone": "637290111",
+	"city": "Dayton",
+	"state": "Ohio",
+	"country": "USA",
+	"organization": "Company 4",
+	"jobProfile": "Software Developer",
+	"additionalInfo": "Buys Lots of Products in general"
 }
