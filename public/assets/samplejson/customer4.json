@@ -1,0 +1,12 @@
+{
+	"id": 4,
+	"name": "Trevor",
+	"email": "philips@test.com",
+	"phone": "637290111",
+	"city": "Dayton",
+	"state": "Ohio",
+	"country": "USA",
+	"organization": "Company 4",
+	"jobProfile": "Software Developer",
+	"additionalInfo": "Buys Lots of Products in general"
+}
