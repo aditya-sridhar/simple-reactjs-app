@@ -12,12 +12,6 @@
     "phone": "987654321"
   },
   {
-    "id": 3,
-    "name": "Tyrion",
-    "email": "tyrion@test.com",
-    "phone": "123412345"
-  },
-  {
     "id": 4,
     "name": "Trevor",
     "email": "philips@test.com",
@@ -28,5 +22,11 @@
     "name": "Marcin",
     "email": "marcin@test.com",
     "phone": "019289327"
+  },
+  {
+    "id": 6,
+    "name": "Av",
+    "email": "av@test.com",
+    "phone": "019"
   }
 ]
